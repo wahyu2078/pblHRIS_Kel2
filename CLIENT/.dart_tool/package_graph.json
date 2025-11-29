@@ -59,6 +59,19 @@
       ]
     },
     {
+      "name": "dio",
+      "version": "5.9.0",
+      "dependencies": [
+        "async",
+        "collection",
+        "dio_web_adapter",
+        "http_parser",
+        "meta",
+        "mime",
+        "path"
+      ]
+    },
+    {
       "name": "http",
       "version": "1.6.0",
       "dependencies": [
@@ -181,8 +194,18 @@
       ]
     },
     {
-      "name": "web",
-      "version": "1.1.1",
+      "name": "dio_web_adapter",
+      "version": "2.1.1",
+      "dependencies": [
+        "dio",
+        "http_parser",
+        "meta",
+        "web"
+      ]
+    },
+    {
+      "name": "mime",
+      "version": "2.0.0",
       "dependencies": []
     },
     {
@@ -202,6 +225,11 @@
         "collection",
         "meta"
       ]
+    },
+    {
+      "name": "web",
+      "version": "1.1.1",
+      "dependencies": []
     },
     {
       "name": "logging",
@@ -291,34 +319,6 @@
     {
       "name": "vm_service",
       "version": "15.0.2",
-      "dependencies": []
-    },
-    {
-      "name": "dio",
-      "version": "5.9.0",
-      "dependencies": [
-        "async",
-        "collection",
-        "dio_web_adapter",
-        "http_parser",
-        "meta",
-        "mime",
-        "path"
-      ]
-    },
-    {
-      "name": "dio_web_adapter",
-      "version": "2.1.1",
-      "dependencies": [
-        "dio",
-        "http_parser",
-        "meta",
-        "web"
-      ]
-    },
-    {
-      "name": "mime",
-      "version": "2.0.0",
       "dependencies": []
     }
   ],

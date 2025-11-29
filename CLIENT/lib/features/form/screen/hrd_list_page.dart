@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../services/api_service.dart';
 import '../../../routes/app_routes.dart';
+import 'package:tracer_study_test_api/routes/app_routes.dart';
+
 
 class HrdListPage extends StatefulWidget {
   const HrdListPage({super.key});
@@ -43,7 +45,6 @@ class _HrdListPageState extends State<HrdListPage> {
                     subtitle: Text(s['tanggal'] ?? ''),
                     trailing: Text(s['status'] ?? ''),
                     onTap: () async {
-                      // tunggu sampai kembali, lalu reload
                       await context.push(AppRoutes.detailSurat, extra: s);
                       await loadData();
                     },

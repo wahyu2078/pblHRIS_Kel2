@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:tracer_study_test_api/routes/app_routes.dart';
+
 
 class ApiService {
-  // gunakan IP yang bisa diakses emulator / device mu.
-  // Untuk Android emulator: 10.0.2.2; untuk Windows/Chrome gunakan http://localhost:8000
   static const String baseURL = "http://10.0.2.2:8000/api";
 
   static Future<bool> createSurat(Map data) async {
@@ -13,8 +13,17 @@ class ApiService {
 
   static Future<List> getSurat() async {
     final res = await http.get(Uri.parse("$baseURL/surat"));
+
     if (res.statusCode == 200) {
-      return jsonDecode(res.body) as List;
+      final decode = jsonDecode(res.body);
+
+      if (decode is Map && decode.containsKey('data')) {
+        return decode['data'];
+      }
+
+      if (decode is List) {
+        return decode;
+      }
     }
     return [];
   }

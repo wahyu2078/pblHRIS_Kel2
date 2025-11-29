@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../services/api_service.dart';
+import 'package:tracer_study_test_api/routes/app_routes.dart';
+
 
 class HrdDetailPage extends StatefulWidget {
   final Map<String, dynamic> surat;
