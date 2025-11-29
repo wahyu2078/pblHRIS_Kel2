@@ -4,62 +4,13 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\LetterFormat;
-<<<<<<< HEAD
-use App\Http\Resources\LetterFormatResource;
-use App\Http\Resources\LetterFormatCollection;
 use Illuminate\Http\Request;
-=======
->>>>>>> 3e544c07ad744a462140f624dcff9c15f3812863
 
 class LetterFormatController extends Controller
 {
+    // GET all templates
     public function index()
     {
-<<<<<<< HEAD
-        $formats = LetterFormat::active()->paginate(10);
-        return new LetterFormatCollection($formats);
-    }
-
-    public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'name' => 'required|string|max:100',
-            'content' => 'required',
-            'status' => 'required|integer',
-        ]);
-
-        $format = LetterFormat::create($validated);
-        return new LetterFormatResource($format);
-    }
-
-    public function show($id)
-    {
-        $format = LetterFormat::active()->findOrFail($id);
-        return new LetterFormatResource($format);
-    }
-
-    public function update(Request $request, $id)
-    {
-        $format = LetterFormat::active()->findOrFail($id);
-        $validated = $request->validate([
-            'name' => 'sometimes|string|max:100',
-            'content' => 'sometimes',
-            'status' => 'sometimes|integer',
-        ]);
-
-        $format->update($validated);
-        return new LetterFormatResource($format);
-    }
-
-    public function destroy($id)
-    {
-        $format = LetterFormat::findOrFail($id);
-        $format->deleted_at = now()->format('Y-m-d H:i:s'); // custom soft delete
-        $format->save();
-        return response()->json(['message' => 'deleted']);
-    }
-}
-=======
         $data = LetterFormat::all();
 
         return response()->json([
@@ -67,5 +18,91 @@ class LetterFormatController extends Controller
             'data' => $data
         ]);
     }
+
+    // GET single template
+    public function show($id)
+    {
+        $data = LetterFormat::find($id);
+
+        if (!$data) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Template tidak ditemukan'
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => $data
+        ]);
+    }
+
+    // POST create new template
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'content' => 'required|string',
+        ]);
+
+        $data = LetterFormat::create([
+            'name' => $request->name,
+            'content' => $request->content,
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Template berhasil dibuat',
+            'data' => $data
+        ], 201);
+    }
+
+    // PUT update template
+    public function update(Request $request, $id)
+    {
+        $data = LetterFormat::find($id);
+
+        if (!$data) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Template tidak ditemukan'
+            ], 404);
+        }
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'content' => 'required|string',
+        ]);
+
+        $data->update([
+            'name' => $request->name,
+            'content' => $request->content,
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Template berhasil diupdate',
+            'data' => $data
+        ]);
+    }
+
+    // DELETE template
+    public function destroy($id)
+    {
+        $data = LetterFormat::find($id);
+
+        if (!$data) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Template tidak ditemukan'
+            ], 404);
+        }
+
+        $data->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Template berhasil dihapus'
+        ]);
+    }
 }
->>>>>>> 3e544c07ad744a462140f624dcff9c15f3812863
